@@ -193,35 +193,9 @@ class Workbook:
             "</style>" + 
             "<h4>✅ Your notebook is ready to go!</h4>" +
             ("" if "pyodide" not in sys.modules else '''
-(to reset, click the following button and reload&rarr;<button type="button" id="button_for_indexeddb">Clear JupyterLite local storage</button>)
-<script>
-window.button_for_indexeddb.onclick = function(e) {
-    window.indexedDB.open('JupyterLite Storage').onsuccess = function(e) {
-        // There are also other tables that we're not clearing:
-        // "counters", "settings", "local-storage-detect-blob-support"
-        let tables = ["checkpoints", "files"];
-
-        let db = e.target.result;
-        let t = db.transaction(tables, "readwrite");
-
-        function clearTable(tablename) {
-            let st = t.objectStore(tablename);
-            st.count().onsuccess = function(e) {
-                console.log("Deleting " + e.target.result +
-                " entries from " + tablename + "...");
-                st.clear().onsuccess = function(e) {
-                    console.log(tablename + " is cleared!");
-                }
-            }
-        }
-
-        for (let tablename of tables) {
-            clearTable(tablename);
-        }
-        alert("Local changes reverted. Now reload the page.")
-    }
-};
-</script>''')
+To clear the notebook and reset,
+select "Clear Browser Data" from the JupyterLite help menu.
+''')
     ))
 
     def node_coalescence_status(arg):

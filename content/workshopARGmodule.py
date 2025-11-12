@@ -5,7 +5,9 @@ import sys
 
 import msprime
 import numpy as np
+import pyslim
 import tskit
+import tszip
 from IPython.display import HTML
 
 ### Hack below - can be removed when questions are saved to JSON files named Q1.json, Q2.json etc
@@ -429,7 +431,7 @@ WB1_base["Q25.json"] = [{
 }]
 
 WB1_base["Q26.json"] = [{
-    "question": "Which population has the highest diversity levels along the genome",
+    "question": "Which population has the highest diversity levels along the genome?",
     "type": "many_choice",
     "answers": [
         {"answer": "central", "correct": true},
@@ -441,6 +443,25 @@ WB1_base["Q26.json"] = [{
     "answers": [
         {"answer": "No", "correct": true, "feedback": "Correct: this is a neutral simulation with constant mutation rate, so we would not expect systematic variation in diversity across the genome."},
         {"answer": "Yes", "correct": false}
+    ]
+}]
+
+WB1_base["Q27.json"] = [{
+    "question": "What does the peak in central-western cross coalescence correspond to?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "The founding of the wester population at ~30,000 generations ago", "correct": true},
+        {"answer": "A sudden increase in the western population size", "correct": false},
+        {"answer": "A sudden drop in the central population size", "correct": false},
+    ]
+}]
+
+WB1_base["Q28.json"] = [{
+    "question": "How many mutations were added?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
     ]
 }]
 
@@ -647,5 +668,10 @@ class Workbook1B(Workbook):
             else:
                 cls.url["Q24.json"][0]["answers"][0]["value"] = int(round(largest_arg.nbytes * 1e-6))
                 cls.url["Q24.json"][1]["answers"][0]["value"] = largest_arg.num_trees
+
+        slim_arg = tszip.load("data/SLiM_sim.tsz")
+        coalesced_arg = pyslim.recapitate(slim_arg, recombination_rate=1e-8, ancestral_Ne=200, random_seed=5)
+        mutated_slim_sim = msprime.sim_mutations(coalesced_arg, rate=1e-8, random_seed=123)
+        cls.url["28.json"][0]["answers"][0]["value"] = mutated_slim_sim.num_mutations
 
         super().setup()

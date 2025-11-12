@@ -428,6 +428,21 @@ WB1_base["Q25.json"] = [{
     ]
 }]
 
+WB1_base["Q26.json"] = [{
+    "question": "Which population has the highest diversity levels along the genome",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "central", "correct": true},
+        {"answer": "western", "correct": false},
+        {"answer": "bonobo", "correct": false},
+    ]}, {
+    "question": "Does the diversity vary across the genome in any of the populations?",
+    "type": "many_choice",
+    "answers": [
+        {"answer": "No", "correct": true, "feedback": "Correct: this is a neutral simulation with constant mutation rate, so we would not expect systematic variation in diversity across the genome."},
+        {"answer": "Yes", "correct": false}
+    ]
+}]
 
 def remove_edges(ts, edge_id_remove_list):
     edges_to_remove_by_child = collections.defaultdict(list)
@@ -631,6 +646,6 @@ class Workbook1B(Workbook):
                 cls.url["Q23.json"][2]["answers"][0]["value"] = largest_arg.num_trees
             else:
                 cls.url["Q24.json"][0]["answers"][0]["value"] = int(round(largest_arg.nbytes * 1e-6))
-                cls.url["Q24.json"][1]["answers"][1]["value"] = largest_arg.num_trees
+                cls.url["Q24.json"][1]["answers"][0]["value"] = largest_arg.num_trees
 
         super().setup()

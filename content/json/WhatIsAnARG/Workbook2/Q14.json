@@ -1,0 +1,14 @@
+[{
+    "question": "How much space does the fully-simplified ARG take up, to the nearest Mb?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
+    ]}, {
+    "question": "How many trees does it have?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
+    ]
+}]

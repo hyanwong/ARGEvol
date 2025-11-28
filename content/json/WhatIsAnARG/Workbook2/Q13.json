@@ -1,0 +1,20 @@
+[{
+    "question": "What percentage of the nodes in the 10 Mb full ARG are unknowable, to the nearest percent?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
+    ]}, {
+    "question": "How much space does the 10Mb full ARG take up, to the nearest Mb?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
+    ]}, {
+    "question": "How many trees are there in the huge ARG?",
+    "type": "numeric",
+    "answers": [
+        {"type": "value", "value": 0, "correct": true},
+        {"type": "default"}
+    ]
+}]
